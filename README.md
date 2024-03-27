@@ -1,4 +1,4 @@
-# Local Agent GPT
+# Local AgentGPT
 
 ## Differences from main repo
 
