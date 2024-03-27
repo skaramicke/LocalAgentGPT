@@ -173,7 +173,7 @@ const SettingsPage = () => {
                     onChange={(e) => updateSettings("customMaxLoops", parseFloat(e.target.value))}
                     attributes={{
                       min: 1,
-                      max: 25,
+                      max: 250,
                       step: 1,
                     }}
                     helpText={t("CONTROL_THE_MAXIMUM_NUM_OF_LOOPS")}
