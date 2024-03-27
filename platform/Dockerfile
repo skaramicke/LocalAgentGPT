@@ -30,6 +30,8 @@ RUN apt-get purge -y \
 COPY . /app/src/
 RUN poetry install --only main
 
+RUN poetry update langchain
+
 CMD ["/usr/local/bin/python", "-m", "reworkd_platform"]
 
 FROM prod as dev
