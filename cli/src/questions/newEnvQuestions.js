@@ -16,7 +16,7 @@ export const newEnvQuestions = [
                 return validKeyErrorMessage
             }
 
-            const endpoint = "https://api.openai.com/v1/models"
+      const endpoint = "http://litellm:4000/v1/models";
             const response = await fetch(endpoint, {
                 headers: {
                     "Authorization": `Bearer ${apikey}`,

@@ -39,8 +39,7 @@ def test_helicone_disabled():
     user = UserBase(id="user_id")
     settings = Settings()
 
-    base, headers, use_helicone = get_base_and_headers(settings, model_settings, user)
-    assert base == "https://api.openai.com/v1"
+    assert base == "http://litellm:4000/v1"
     assert headers is None
     assert use_helicone is False
 
@@ -58,7 +57,7 @@ def test_helicone_enabled_with_custom_api_key():
 
     base, headers, use_helicone = get_base_and_headers(settings, model_settings, user)
 
-    assert base == "https://api.openai.com/v1"
+    assert base == "http://litellm:4000/v1"
     assert headers is None
     assert use_helicone is False
 
@@ -81,9 +80,8 @@ def test_create_model(streaming, use_azure):
         max_tokens=100,
     )
 
-    settings.openai_api_base = (
-        "https://api.openai.com" if not use_azure else "https://oai.azure.com"
-    )
+    settings.openai_api_base = ("http://litellm:4000"
+                                if not use_azure else "https://oai.azure.com")
     settings.openai_api_key = "key"
     settings.openai_api_version = "version"
 
