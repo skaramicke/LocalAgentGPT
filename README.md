@@ -1,3 +1,24 @@
+# Local Agent GPT
+
+## Differences from main repo
+
+### 1. LiteLLM
+
+1. A LiteLLM service has been added to the docker-compose file. It proxies the OpenAI model API calls to the host machine Ollama service. Change ./litellm-proxy.yaml to configure which models to use if you don't want `llama2` for everything.
+2. All instances of https://api.openai.com have been replaced with http://litellm:4000, except for the frontend which (should) instead go to htpt://localhost:4000
+
+### 2. `langchain.globals` error
+
+There was an issue with the langchain version causing the platform to crash with the error ["No module named 'langchain.globals'"](https://github.com/reworkd/AgentGPT/issues/1393) which was 'fixed' by adding `RUN poetry update langchain` to the `./platform/Dockerfile`. This is a temporary fix and should be removed once the issue is resolved.
+
+### 3. 25 loops to 250
+
+The max loop count was increased to 250 because 25 is very low.
+
+---
+
+# Main repo README.md
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/reworkd/AgentGPT/main/next/public/banner.png" height="300" alt="AgentGPT Logo"/>
 </p>
@@ -30,15 +51,16 @@ It will attempt to reach the goal by thinking of tasks to do, executing them, an
 ---
 
 ## ✨ Demo
+
 For the best demo experience, try [our site](https://agentgpt.reworkd.ai) directly :)
 
 [Demo Video](https://github.com/reworkd/AgentGPT/assets/50181239/5348e44a-29a5-4280-a06b-fe1429a8d99e)
-
 
 ## 👨‍🚀 Getting Started
 
 The easiest way to get started with AgentGPT is automatic setup CLI bundled with the project.
 The cli sets up the following for AgentGPT:
+
 - 🔐 [Environment variables](https://github.com/reworkd/AgentGPT/blob/main/.env.example) (and API Keys)
 - 🗂️ [Database](https://github.com/reworkd/AgentGPT/tree/main/db) (Mysql)
 - 🤖 [Backend](https://github.com/reworkd/AgentGPT/tree/main/platform) (FastAPI)
@@ -57,6 +79,7 @@ Before you get started, please make sure you have the following installed:
 - A [Replicate API Token](https://replicate.com/signin) (optional)
 
 ## Getting Started :rocket:
+
 1. **Open your editor**
 
 2. **Open the Terminal** - Typically, you can do this from a 'Terminal' tab or by using a shortcut
@@ -65,17 +88,21 @@ Before you get started, please make sure you have the following installed:
 3. **Clone the Repository and Navigate into the Directory** - Once your terminal is open, you can clone the repository and move into the directory by running the commands below.
 
    **For Mac/Linux users** :apple: :penguin:
+
    ```bash
    git clone https://github.com/reworkd/AgentGPT.git
    cd AgentGPT
    ./setup.sh
    ```
+
    **For Windows users** :windows:
+
    ```bash
    git clone https://github.com/reworkd/AgentGPT.git
    cd AgentGPT
    ./setup.bat
    ```
+
 4. **Follow the setup instructions from the script** - add the appropriate API keys, and once all of the services are running, travel to [http://localhost:3000](http://localhost:3000) on your web-browser.
 
 Happy hacking! :tada:
@@ -84,7 +111,6 @@ Happy hacking! :tada:
 
 This platform is currently in beta, a full list of completed and planed features can be found on
 our [public roadmap](https://docs.reworkd.ai/essentials/roadmap).
-
 
 ## 🚀 Tech Stack
 
@@ -96,7 +122,6 @@ our [public roadmap](https://docs.reworkd.ai/essentials/roadmap).
 - ✅ **Styling**: [TailwindCSS + HeadlessUI](https://tailwindcss.com).
 - ✅ **Schema Validation**: [Zod](https://github.com/colinhacks/zod) + [Pydantic](https://docs.pydantic.dev/).
 - ✅ **LLM Tooling**: [Langchain](https://github.com/hwchase17/langchain).
-
 
 <h2 align="center">
 💝 Our GitHub sponsors 💝
